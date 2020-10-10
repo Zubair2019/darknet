@@ -11,6 +11,16 @@ import csv
 #for arg in sys.argv:
 JSON_FILE = sys.argv[1] #Contains path to json file
 INPUT_IMAGE_PATH = sys.argv[2] #A file that contains input image path
+# field names
+fields = ['Image Name', 'Component', 'Confidence', 'X', 'Y', 'Width', 'Height', 'Text']
+# name of csv file
+filename = "component.csv"
+# writing to csv file
+csvfile = open(filename, 'a')
+# creating a csv writer object
+csvwriter = csv.writer(csvfile)
+# writing the fields
+csvwriter.writerow(fields)
 
 
 # This function creates directories to hold intermediate components and complete components
@@ -27,27 +37,7 @@ def make_dir(input_path,caption):
         print(error)
     #print("This path is " + str(path))
     return path
-#-------------------------------------------------------
 
-#This function creates a csv file containig component descriptions
-
-def populate_csv(list):
-    # field names
-    fields = ['Image Name', 'Component', 'Confidence', 'X', 'Y', 'Width', 'Height', 'Text']
-
-    # name of csv file
-    filename = "component.csv"
-
-    # writing to csv file
-    with open(filename, 'a') as csvfile:
-        # creating a csv writer object
-        csvwriter = csv.writer(csvfile)
-        # writing the fields
-        csvwriter.writerow(fields)
-        # writing the data rows
-        csvwriter.writerow(list)
-
-#-------------------------------------------------------
 #This function uses tesseract to extract text from intermediate components
 def tesse(tesse_path, dest_path, full_string):
     # construct the argument parser and parse the arguments
@@ -99,11 +89,8 @@ def tesse(tesse_path, dest_path, full_string):
 
 
         list = full_string.split(',')
-
-        populate_csv(list)
+        csvwriter.writerow(list)
         cv2.imwrite(dest_path +"/"+ os.path.basename(tesse_path), image)
-        # cv2.imshow('image',image)
-        # cv2.waitKey(0)
 
 #------------------------------------------------------------------------------
 
@@ -143,5 +130,5 @@ def cropping(FILE, INPUT): #Funtion to crop image and return multiple cropped im
 
 
 if __name__ == "__main__":
-    #INPUT_DIR = extract_path(INPUT_IMAGE_FILE)
     cropping(JSON_FILE, INPUT_IMAGE_PATH)
+    csvfile.close()
