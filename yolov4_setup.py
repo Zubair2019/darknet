@@ -11,9 +11,13 @@ from yolov4_config import *
 
 filters=(classes+5)*3
  
-VARIABLE_LIST = [classes, max_batches, batch, subdivisions, width, 
+VARIABLE_LIST1 = [classes, max_batches, batch, subdivisions, width, 
                  height, channels, momentum, decay, learning_rate,
                  steps,scales, filters]
+                 
+ VARIABLE_LIST = [scales, learning_rate, height, channels, filters, 
+                  decay, batch, width, subdivisions, classes, steps, 
+                  max_batches, momentum]
 
 DICT_ORIGIN = {"classes":80, 
                "max_batches":8000,
