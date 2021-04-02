@@ -126,9 +126,12 @@ def cropping(FILE, INPUT): #Funtion to crop image and return multiple cropped im
             zub = os.path.basename(INPUT) + "," + name + "," + str(confidence) + "," + str(center_x) + "," + str(center_y)\
                   + "," + str(width) + "," + str(height) + ","
             tesse(path + "/" + str(i) + '.jpg', path1, zub)
+            print("Tesseract working on Component: ",[i])
 
 
 
 if __name__ == "__main__":
+    print("Starting to extract Text using Tesseract")
     cropping(JSON_FILE, INPUT_IMAGE_PATH)
+    print("Text extracted successfully. You can find the description of components in component.csv")
     csvfile.close()
