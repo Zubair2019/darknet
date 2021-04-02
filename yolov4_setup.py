@@ -15,7 +15,7 @@ VARIABLE_LIST1 = [classes, max_batches, batch, subdivisions, width,
                  height, channels, momentum, decay, learning_rate,
                  steps,scales, filters]
                  
- VARIABLE_LIST = [scales, learning_rate, height, channels, filters, 
+VARIABLE_LIST = [scales, learning_rate, height, channels, filters, 
                   decay, batch, width, subdivisions, classes, steps, 
                   max_batches, momentum]
 
